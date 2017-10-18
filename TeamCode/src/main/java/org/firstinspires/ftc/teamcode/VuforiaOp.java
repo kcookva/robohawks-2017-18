@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.LinearOpMode;
 import com.vuforia.HINT;
 import com.vuforia.Vuforia;
@@ -15,9 +16,11 @@ import org.firstinspires.ftc.robotcore.external.navigation.VuforiaTrackables;
 
 /**
  * Created by willem on 10/17/17.
+ * This file from this YouTube tutorial: https://www.youtube.com/watch?v=2z-o9Ts8XoE
+ * There are already samples of Vuforia from FTC in FtcRobotController/java/org.firstinspires.ftc.robotcontroller/external.samples/
  */
 
-@Override
+@Disabled
 public class VuforiaOp extends LinearOpMode {
     public void runOpMode() throws InterruptedException {
         VuforiaLocalizer.Parameters params = new VuforiaLocalizer.Parameters(R.id.cameraMonitorViewId);
