@@ -6,7 +6,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 /**
- * Created by Sam on 11/2/2017.
+ * Created by Sam on 11/2/2017. Copied and pasted by Willem. Viewed by Milo.
  */
 
 public class LifterBot extends OpMode{
