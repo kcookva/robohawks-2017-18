@@ -37,9 +37,9 @@ public class LifterBot extends OpMode{
     @Override
     public void loop() {                                        // goes into loop after the setup is done  in above void
         // sets up a loop for driving the robot
-        double rotate = -gamepad1.right_stick_x;
-        double strafe = -gamepad1.left_stick_x;// input joystick values into variables that we can use to control the motors
-        double drive = -gamepad1.left_stick_y;
+        double rotate = gamepad1.right_stick_x;
+        double strafe = gamepad1.left_stick_x;// input joystick values into variables that we can use to control the motors
+        double drive = gamepad1.left_stick_y;
 
 
         rotate = Range.clip(rotate, -1, 1);                      // sets a value check to make sure we don't go over the desired speed (related to joysticks)
@@ -51,23 +51,23 @@ public class LifterBot extends OpMode{
         else if (gamepad1.dpad_down) speed = 2;
         else if (gamepad1.dpad_left) speed = 1;
 
-        if (Math.abs(gamepad1.left_stick_y) > .1 || Math.abs(gamepad1.right_stick_y) > .1)  // if joystick value is greater than .1, move.  Will not move if no value (joystick idle)
-        {
-            motorRightFront.setPower((drive - strafe - rotate) / 12 * speed);
-            motorRightBack.setPower ((drive + strafe - rotate) / 12 * speed);
-            motorLeftFront.setPower ((drive + strafe + rotate) / 12 * speed);
-            motorLeftBack.setPower  ((drive - strafe + rotate) / 12 * speed);
-        }
+       // if ((Math.abs(gamepad1.left_stick_y) > 0.1) || (Math.abs(gamepad1.right_stick_y)) > 0.1 || (Math.abs(gamepad1.left_stick_x) > 0.1))  // if joystick value is greater than .1, move.  Will not move if no value (joystick idle)
+       // {
+            motorRightFront.setPower((drive + strafe + rotate) / 12 * speed);
+            motorRightBack.setPower ((drive - strafe + rotate) / 12 * speed);
+            motorLeftFront.setPower ((-drive + strafe + rotate) / 12 * speed);
+            motorLeftBack.setPower  ((-drive - strafe + rotate) / 12 * speed);
+       // }
 
-        else                            //will not move if joysticks are not moving
-        {
+       // else                            //will not move if joysticks are not moving
+       /* {
             motorRightFront.setPower(0);
             motorRightBack.setPower(0);
             motorLeftFront.setPower(0);
             motorLeftBack.setPower(0);
-        }
+       }
 
-        /*if(gamepad1.left_bumper) {
+        if(gamepad1.left_bumper) {
             lift.setPosition(1);
         }
         else if(gamepad1.right_bumper) {
