@@ -1,6 +1,8 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
@@ -9,13 +11,14 @@ import com.qualcomm.robotcore.util.Range;
  * Created by Sam on 11/2/2017. Copied and pasted by Willem. Viewed by Milo.
  */
 
+@TeleOp(name="LifterBot", group="Iterative Opmode")
 public class LifterBot extends OpMode{
 
-    DcMotor motorRightFront;                    // creates motors in code
+    DcMotor motorRightFront;    // creates motors in code
     DcMotor motorRightBack;
     DcMotor motorLeftFront;
     DcMotor motorLeftBack;
-    Servo lift;
+   // Servo lift;
 
     public void init()          // initiates and maps motors/servos/sensors
     {
@@ -23,7 +26,7 @@ public class LifterBot extends OpMode{
         motorRightBack = hardwareMap.dcMotor.get("mRB");               // !! Must be prenamed in phone app to green letters (mRF, mRB, etc.) !!
         motorLeftFront = hardwareMap.dcMotor.get("mLF");
         motorLeftBack = hardwareMap.dcMotor.get("mLB");
-        lift = hardwareMap.servo.get("lift");
+     //   lift = hardwareMap.servo.get("lift");
 
         //motorRightFront.setDirection(DcMotor.Direction.REVERSE);      //think about logic of motors and how you need to reverse two of them
         //motorRightBack.setDirection(DcMotor.Direction.REVERSE);
@@ -64,7 +67,7 @@ public class LifterBot extends OpMode{
             motorLeftBack.setPower(0);
         }
 
-        if(gamepad1.left_bumper) {
+        /*if(gamepad1.left_bumper) {
             lift.setPosition(1);
         }
         else if(gamepad1.right_bumper) {
@@ -73,7 +76,7 @@ public class LifterBot extends OpMode{
         else {
             lift.setPosition(0.5);
         }
-
+*/
         telemetry.addData("Joy1", "Joystick 1:  " + String.format("%.2s", gamepad1.left_stick_y)); // feedback given to the driver phone from the robot phone
         telemetry.addData("Joy2", "Joystick 2:  " + String.format("%.2s", gamepad1.right_stick_y));
         telemetry.addData("Joy2", "Joystick 2:  " + String.format("%.2s", gamepad1.right_stick_y));
