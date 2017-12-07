@@ -29,8 +29,8 @@ public class LifterBot extends OpMode{
         motorLeftBack = hardwareMap.dcMotor.get("mLB");
         lift = hardwareMap.crservo.get("lift");
 
-        //motorRightFront.setDirection(DcMotor.Direction.REVERSE);      //think about logic of motors and how you need to reverse two of them
-        //motorRightBack.setDirection(DcMotor.Direction.REVERSE);
+        motorRightFront.setDirection(DcMotor.Direction.REVERSE);      //think about logic of motors and how you need to reverse two of them
+        motorRightBack.setDirection(DcMotor.Direction.REVERSE);
     }
 
     int speed = 1;
@@ -69,17 +69,17 @@ public class LifterBot extends OpMode{
         }
 
         if(gamepad1.left_bumper) {
-            lift.setPower(1);
-        }
-        else if(gamepad1.right_bumper) {
-            lift.setPower(0);
-        }
-        else {
             lift.setPower(-1);
         }
+        else if(gamepad1.right_bumper) {
+            lift.setPower(1);
+        }
+        else {
+            lift.setPower(0);
+        }
 
-        telemetry.addData("Joy1", "Joystick 1:  " + String.format("%.2s", gamepad1.left_stick_y)); // feedback given to the driver phone from the robot phone
-        telemetry.addData("Joy2", "Joystick 2:  " + String.format("%.2s", gamepad1.right_stick_y));
-        telemetry.addData("Joy2", "Joystick 2:  " + String.format("%.2s", gamepad1.right_stick_y));
+        telemetry.addData("Joy1", "Drive:  " + String.format("%.2s", drive)); // feedback given to the driver phone from the robot phone
+        telemetry.addData("Joy1", "Strafe:  " + String.format("%.2s", strafe));
+        telemetry.addData("Joy1", "Rotate:  " + String.format("%.2s", rotate));
     }
 }
