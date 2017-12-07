@@ -1,6 +1,9 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
+import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
+import com.qualcomm.robotcore.hardware.CRServo;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
@@ -9,13 +12,14 @@ import com.qualcomm.robotcore.util.Range;
  * Created by Sam on 11/2/2017. Copied and pasted by Willem. Viewed by Milo.
  */
 
+@TeleOp(name="LifterBot", group ="Concept")
 public class LifterBot extends OpMode{
 
     DcMotor motorRightFront;                    // creates motors in code
     DcMotor motorRightBack;
     DcMotor motorLeftFront;
     DcMotor motorLeftBack;
-    Servo lift;
+    CRServo lift;
 
     public void init()          // initiates and maps motors/servos/sensors
     {
@@ -23,7 +27,7 @@ public class LifterBot extends OpMode{
         motorRightBack = hardwareMap.dcMotor.get("mRB");               // !! Must be prenamed in phone app to green letters (mRF, mRB, etc.) !!
         motorLeftFront = hardwareMap.dcMotor.get("mLF");
         motorLeftBack = hardwareMap.dcMotor.get("mLB");
-        lift = hardwareMap.servo.get("lift");
+        lift = hardwareMap.crservo.get("lift");
 
         //motorRightFront.setDirection(DcMotor.Direction.REVERSE);      //think about logic of motors and how you need to reverse two of them
         //motorRightBack.setDirection(DcMotor.Direction.REVERSE);
@@ -65,13 +69,13 @@ public class LifterBot extends OpMode{
         }
 
         if(gamepad1.left_bumper) {
-            lift.setPosition(1);
+            lift.setPower(1);
         }
         else if(gamepad1.right_bumper) {
-            lift.setPosition(0);
+            lift.setPower(0);
         }
         else {
-            lift.setPosition(0.5);
+            lift.setPower(-1);
         }
 
         telemetry.addData("Joy1", "Joystick 1:  " + String.format("%.2s", gamepad1.left_stick_y)); // feedback given to the driver phone from the robot phone
