@@ -1,5 +1,6 @@
 package org.firstinspires.ftc.teamcode;
 
+import com.qualcomm.hardware.motors.RevRoboticsCoreHexMotor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
@@ -19,7 +20,7 @@ public class LifterBot extends OpMode{
     DcMotor motorRightBack;
     DcMotor motorLeftFront;
     DcMotor motorLeftBack;
-    CRServo lift;
+    DcMotor lift;
 
     public void init()          // initiates and maps motors/servos/sensors
     {
@@ -27,20 +28,20 @@ public class LifterBot extends OpMode{
         motorRightBack = hardwareMap.dcMotor.get("mRB");               // !! Must be prenamed in phone app to green letters (mRF, mRB, etc.) !!
         motorLeftFront = hardwareMap.dcMotor.get("mLF");
         motorLeftBack = hardwareMap.dcMotor.get("mLB");
-        lift = hardwareMap.crservo.get("lift");
+        lift = hardwareMap.dcMotor.get("lift");
 
-        motorRightFront.setDirection(DcMotor.Direction.REVERSE);      //think about logic of motors and how you need to reverse two of them
-        motorRightBack.setDirection(DcMotor.Direction.REVERSE);
+        motorLeftFront.setDirection(DcMotor.Direction.REVERSE);      //think about logic of motors and how you need to reverse two of them
+        motorLeftBack.setDirection(DcMotor.Direction.REVERSE);
     }
 
-    int speed = 1;
+    int speed = 4;
 
     @Override
     public void loop() {                                        // goes into loop after the setup is done  in above void
         // sets up a loop for driving the robot
         double rotate = -gamepad1.right_stick_x;
-        double strafe = -gamepad1.left_stick_x;// input joystick values into variables that we can use to control the motors
-        double drive = -gamepad1.left_stick_y;
+        double strafe = -gamepad1.left_stick_x;                 // input joystick values into variables that we can use to control the motors
+        double drive = gamepad1.left_stick_y;
 
 
         rotate = Range.clip(rotate, -1, 1);                      // sets a value check to make sure we don't go over the desired speed (related to joysticks)
@@ -52,7 +53,7 @@ public class LifterBot extends OpMode{
         else if (gamepad1.dpad_down) speed = 2;
         else if (gamepad1.dpad_left) speed = 1;
 
-        if (Math.abs(gamepad1.left_stick_y) > .1 || Math.abs(gamepad1.right_stick_y) > .1)  // if joystick value is greater than .1, move.  Will not move if no value (joystick idle)
+        if (Math.abs(gamepad1.left_stick_y) > .1 || Math.abs(gamepad1.right_stick_x) > .1 || Math.abs(gamepad1.left_stick_x) > .1)  // if joystick value is greater than .1, move.  Will not move if no value (joystick idle)
         {
             motorRightFront.setPower((drive - strafe - rotate) / 12 * speed);
             motorRightBack.setPower ((drive + strafe - rotate) / 12 * speed);
