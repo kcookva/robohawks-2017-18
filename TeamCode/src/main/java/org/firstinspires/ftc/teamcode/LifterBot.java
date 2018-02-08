@@ -21,6 +21,7 @@ public class LifterBot extends OpMode{
     DcMotor motorLeftFront;
     DcMotor motorLeftBack;
     DcMotor lift;
+    CRServo gripper;
 
     public void init()          // initiates and maps motors/servos/sensors
     {
@@ -29,6 +30,7 @@ public class LifterBot extends OpMode{
         motorLeftFront = hardwareMap.dcMotor.get("mLF");
         motorLeftBack = hardwareMap.dcMotor.get("mLB");
         lift = hardwareMap.dcMotor.get("lift");
+        gripper = hardwareMap.crservo.get("gripper");
 
         motorLeftFront.setDirection(DcMotor.Direction.REVERSE);      //think about logic of motors and how you need to reverse two of them
         motorLeftBack.setDirection(DcMotor.Direction.REVERSE);
@@ -77,6 +79,16 @@ public class LifterBot extends OpMode{
         }
         else {
             lift.setPower(0);
+        }
+
+        if(gamepad1.left_trigger > 0.1) {
+            gripper.setPower(-1);
+        }
+        else if(gamepad1.right_trigger > 0.1) {
+            gripper.setPower(1);
+        }
+        else {
+            gripper.setPower(0);
         }
 
         telemetry.addData("Joy1", "Drive:  " + String.format("%.2s", drive)); // feedback given to the driver phone from the robot phone
