@@ -81,10 +81,10 @@ public class LifterBot extends OpMode{
             lift.setPower(0);
         }
 
-        if(gamepad1.left_trigger > 0.1) {
+        if(gamepad1.right_trigger > 0.1) {
             gripper.setPower(-1);
         }
-        else if(gamepad1.right_trigger > 0.1) {
+        else if(gamepad1.left_trigger > 0.1) {
             gripper.setPower(1);
         }
         else {
