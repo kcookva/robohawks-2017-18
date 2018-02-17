@@ -1,8 +1,5 @@
 package org.firstinspires.ftc.teamcode;
 
-import com.qualcomm.hardware.motors.RevRoboticsCoreHexMotor;
-import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
-import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -14,15 +11,18 @@ import com.qualcomm.robotcore.util.Range;
  * Created by Sam on 11/2/2017. Copied and pasted by Willem. Viewed by Milo.
  */
 
-@TeleOp(name="5741 TeleOp", group ="Competition")
-public class LifterBot extends OpMode {
+@TeleOp(name = "5741 TeleOp Zach+Ben", group = "Competition")
+public class LifterBotZach extends OpMode {
 
     DcMotor motorRightFront;                    // creates motors in code
     DcMotor motorRightBack;
     DcMotor motorLeftFront;
     DcMotor motorLeftBack;
     DcMotor lift;
-    CRServo gripper;
+    Servo grip1;
+    Servo grip2;
+
+    boolean run = true;
 
     public void init()          // initiates and maps motors/servos/sensors
     {
@@ -31,7 +31,8 @@ public class LifterBot extends OpMode {
         motorLeftFront = hardwareMap.dcMotor.get("mLF");
         motorLeftBack = hardwareMap.dcMotor.get("mLB");
         lift = hardwareMap.dcMotor.get("lift");
-        gripper = hardwareMap.crservo.get("gripper");
+        grip1 = hardwareMap.servo.get("grip1");
+        grip2 = hardwareMap.servo.get("grip2");
 
         motorLeftFront.setDirection(DcMotor.Direction.REVERSE);      //think about logic of motors and how you need to reverse two of them
         motorLeftBack.setDirection(DcMotor.Direction.REVERSE);
@@ -46,6 +47,7 @@ public class LifterBot extends OpMode {
         double rotate = -gamepad1.right_stick_x;
         double strafe = -gamepad1.left_stick_x;                 // input joystick values into variables that we can use to control the motors
         double drive = gamepad1.left_stick_y;
+        double liftSpeed = gamepad1.right_stick_y;
 
 
         rotate = Range.clip(rotate, -1, 1);                      // sets a value check to make sure we don't go over the desired speed (related to joysticks)
@@ -59,38 +61,31 @@ public class LifterBot extends OpMode {
 
         if (Math.abs(gamepad1.left_stick_y) > .1 || Math.abs(gamepad1.right_stick_x) > .1 || Math.abs(gamepad1.left_stick_x) > .1)  // if joystick value is greater than .1, move.  Will not move if no value (joystick idle)
         {
-            motorRightFront.setPower((drive - strafe - rotate)*balancer / 12 * speed);
-            motorRightBack.setPower ((drive + strafe - rotate)*(1/balancer) / 12 * speed);
-            motorLeftFront.setPower ((drive + strafe + rotate)*balancer / 12 * speed);
-            motorLeftBack.setPower  ((drive - strafe + rotate)*(1/balancer) / 12 * speed);
-        }
-
-        else                            //will not move if joysticks are not moving
+            motorRightFront.setPower((drive - strafe - rotate) * balancer / 12 * speed);
+            motorRightBack.setPower((drive + strafe - rotate) * (1 / balancer) / 12 * speed);
+            motorLeftFront.setPower((drive + strafe + rotate) * balancer / 12 * speed);
+            motorLeftBack.setPower((drive - strafe + rotate) * (1 / balancer) / 12 * speed);
+        } else                            //will not move if joysticks are not moving
         {
             motorRightFront.setPower(0);
             motorRightBack.setPower(0);
             motorLeftFront.setPower(0);
             motorLeftBack.setPower(0);
         }
-
-        if(gamepad1.left_bumper) {
-            lift.setPower(-1);
-        }
-        else if(gamepad1.right_bumper) {
+        if (liftSpeed > 0.1) {
+            lift.setPower(-0.1);
+        } else if (liftSpeed < -0.1) {
             lift.setPower(1);
-        }
-        else {
-            lift.setPower(0);
+        } else {
+            lift.setPower(0.2);
         }
 
-        if(gamepad1.right_trigger > 0.1) {
-            gripper.setPower(-1);
-        }
-        else if(gamepad1.left_trigger > 0.1) {
-            gripper.setPower(1);
-        }
-        else {
-            gripper.setPower(0);
+        if (gamepad1.left_bumper) {
+            grip1.setPosition(0.75);
+            grip2.setPosition(0.25);
+        } else if (gamepad1.right_bumper) {
+            grip1.setPosition(1);
+            grip2.setPosition(0);
         }
 
         telemetry.addData("Joy1", "Drive:  " + String.format("%.2s", drive)); // feedback given to the driver phone from the robot phone
