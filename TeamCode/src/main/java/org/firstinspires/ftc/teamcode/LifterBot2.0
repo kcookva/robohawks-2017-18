@@ -12,7 +12,7 @@ import com.qualcomm.robotcore.hardware.Servo;
 import com.qualcomm.robotcore.util.Range;
 
 @TeleOp(name="LifterBot2", group="Concept")
-public class LifterBot2 extends OpMode { // Predefines/creates motors
+public class LifterBot2.0 extends OpMode { // Predefines/creates motors
 
     DcMotor motorRightFront;
     DcMotor motorRightBack;
@@ -58,7 +58,7 @@ public class LifterBot2 extends OpMode { // Predefines/creates motors
             speed = 1;
         }
 
-        if (Math.abs(gamepad1.left_stick_y) > .1 || Math.abs(gamepad1.right_stick_x) > .1 || Math.abs(gamepad1.left_stick_x) > .1)) { // If the left or right sticks move more than .1 they move, if not then they don't move
+        if (Math.abs(gamepad1.left_stick_y) > .1 || Math.abs(gamepad1.right_stick_x) > .1 || Math.abs(gamepad1.left_stick_x) > .1) { // If the left or right sticks move more than .1 they move, if not then they don't move
             motorRightFront.setPower((drive - strafe - rotate) / 12 * speed);
             motorRightBack.setPower((drive + strafe - rotate) / 12 * speed);
             motorLeftFront.setPower((drive + strafe + rotate) / 12 * speed);
