@@ -171,7 +171,7 @@ Please note, however, that version 3.00 is considered "alpha" code.  This code i
 
 Changes include:
  * Major rework of sensor-related infrastructure.  Includes rewriting sensor classes to implement synchronous I2C communication.
- * Fix to reset Autonomous timer back to 30 seconds.
+ * Fix to reset org.firstinspires.ftc.teamcode.Autonomous timer back to 30 seconds.
  * Implementation of specific motor profiles for approved 12V motors (includes Tetrix, AndyMark, Matrix and REV models).
  * Modest improvements to enhance Wi-Fi P2P pairing.
  * Fixes telemetry log addition race.
@@ -291,7 +291,7 @@ Version 2.4 (released on 16.11.13)
      - Added logging when a blocks file is read/written.
      - Fixed bug to properly render blocks even if missing devices from configuration file.
      - Added support for additional characters (not just alphanumeric) for the block file names (for download and upload).
-     - Added support for OpMode flavor (“Autonomous” or “TeleOp”) and group.
+     - Added support for OpMode flavor (“org.firstinspires.ftc.teamcode.Autonomous” or “TeleOp”) and group.
   * Changes to Samples to prevent tutorial issues.
   * Incorporated suggested changes from public pull 216 (“Replace .. paths”).
   * Remove Servo Glitches when robot stopped.
@@ -424,7 +424,7 @@ Release 16.03.09
     - waitOneFullHardwareCycle() and waitForNextHardwareCycle() are no longer needed and have been deprecated.
     - runOpMode() (for a LinearOpMode) is now decoupled from the system's hardware read/write thread.
     - loop() (for an OpMode) is now decoupled from the system's hardware read/write thread.
-    - Methods are synchronous.
+    - org.firstinspires.ftc.teamcode.Autonomous.Methods are synchronous.
     - For example, if you call setMode(DcMotorController.RunMode.RESET_ENCODERS) for a motor, the encoder is guaranteed to be reset when the method call is complete.
     - For legacy module (NXT compatible), user no longer has to toggle between read and write modes when reading from or writing to a legacy device.
  * Changes made to enhance reliability/robustness during ESD event.

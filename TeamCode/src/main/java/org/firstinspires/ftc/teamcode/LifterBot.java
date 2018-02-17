@@ -2,6 +2,7 @@ package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.hardware.motors.RevRoboticsCoreHexMotor;
 import com.qualcomm.robotcore.eventloop.opmode.Autonomous;
+import com.qualcomm.robotcore.eventloop.opmode.Disabled;
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.CRServo;
@@ -13,8 +14,8 @@ import com.qualcomm.robotcore.util.Range;
  * Created by Sam on 11/2/2017. Copied and pasted by Willem. Viewed by Milo.
  */
 
-@TeleOp(name="LifterBot", group ="Concept")
-public class LifterBot extends OpMode{
+@TeleOp(name="5741 TeleOp", group ="Competition")
+public class LifterBot extends OpMode {
 
     DcMotor motorRightFront;                    // creates motors in code
     DcMotor motorRightBack;
@@ -37,6 +38,7 @@ public class LifterBot extends OpMode{
     }
 
     int speed = 4;
+    double balancer = 1.3;
 
     @Override
     public void loop() {                                        // goes into loop after the setup is done  in above void
@@ -57,10 +59,10 @@ public class LifterBot extends OpMode{
 
         if (Math.abs(gamepad1.left_stick_y) > .1 || Math.abs(gamepad1.right_stick_x) > .1 || Math.abs(gamepad1.left_stick_x) > .1)  // if joystick value is greater than .1, move.  Will not move if no value (joystick idle)
         {
-            motorRightFront.setPower((drive - strafe - rotate) / 12 * speed);
-            motorRightBack.setPower ((drive + strafe - rotate) / 12 * speed);
-            motorLeftFront.setPower ((drive + strafe + rotate) / 12 * speed);
-            motorLeftBack.setPower  ((drive - strafe + rotate) / 12 * speed);
+            motorRightFront.setPower((drive - strafe - rotate)*balancer / 12 * speed);
+            motorRightBack.setPower ((drive + strafe - rotate)*(1/balancer) / 12 * speed);
+            motorLeftFront.setPower ((drive + strafe + rotate)*balancer / 12 * speed);
+            motorLeftBack.setPower  ((drive - strafe + rotate)*(1/balancer) / 12 * speed);
         }
 
         else                            //will not move if joysticks are not moving
