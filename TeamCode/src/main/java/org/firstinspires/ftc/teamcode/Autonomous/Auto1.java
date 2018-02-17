@@ -10,8 +10,8 @@ import com.qualcomm.robotcore.util.Range;
  * Created by skc5741 on 2/15/18.
  */
 
-@Autonomous(name="5741 Autonomous", group ="Competition")
-public class FinalAutonomous extends Methods {
+@Autonomous(name="5741 Left Auto", group ="Competition")
+public class Auto1 extends Methods {
 
     public void loop() {
 
@@ -21,10 +21,10 @@ public class FinalAutonomous extends Methods {
                 stage++;
                 break;
             case 1:
-                forward(0.7, 0.25);
+                forward(1.1, 0.15);
                 break;
             case 2:
-                strafeLeft(0.5, 0.5);
+                strafeLeft(0.5, 0.25);
                 break;
         }
 
