@@ -4,6 +4,7 @@ import com.qualcomm.robotcore.eventloop.opmode.OpMode;
 import com.qualcomm.robotcore.eventloop.opmode.TeleOp;
 import com.qualcomm.robotcore.hardware.DcMotor;
 import com.qualcomm.robotcore.hardware.Servo;
+import com.qualcomm.robotcore.util.ElapsedTime;
 import com.qualcomm.robotcore.util.Range;
 
 /**
@@ -21,7 +22,11 @@ public class LifterBotWillem extends OpMode {
     Servo grip1;
     Servo grip2;
 
-    boolean run = true;
+    ElapsedTime timer = new ElapsedTime();
+    boolean leftWasPressed = true;
+    boolean rightWasPressed = false;
+    double grip1Position = grip1.getPosition();
+    double grip2Position = grip2.getPosition();
 
     public void init()          // initiates and maps motors/servos/sensors
     {
@@ -80,11 +85,29 @@ public class LifterBotWillem extends OpMode {
         }
 
         if (gamepad1.left_bumper) {
-            grip1.setPosition(0.75);
-            grip2.setPosition(0.25);
+            if (!leftWasPressed) {
+                timer.reset();
+                leftWasPressed = true;
+                grip1Position = grip1.getPosition();
+                grip2Position = grip2.getPosition();
+            }
+            grip1.setPosition(grip1Position - 0.001 * timer.time());
+            grip2.setPosition(grip2Position + 0.001 * timer.time());
+
+        } else if(leftWasPressed){
+            leftWasPressed = false;
         } else if (gamepad1.right_bumper) {
-            grip1.setPosition(1);
-            grip2.setPosition(0);
+            if (!rightWasPressed) {
+                timer.reset();
+                rightWasPressed = true;
+                grip1Position = grip1.getPosition();
+                grip2Position = grip2.getPosition();
+            }
+            grip1.setPosition(grip1Position + 0.001 * timer.time());
+            grip2.setPosition(grip2Position - 0.001 * timer.time());
+
+        } else if(rightWasPressed){
+            rightWasPressed = false;
         }
 
         telemetry.addData("Joy1", "Drive:  " + String.format("%.2s", drive)); // feedback given to the driver phone from the robot phone

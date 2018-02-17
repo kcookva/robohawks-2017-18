@@ -22,13 +22,6 @@ public class LifterBotZach extends OpMode {
     Servo grip1;
     Servo grip2;
 
-    ElapsedTime timer = new ElapsedTime();
-    boolean run = true;
-    boolean leftWasPressed = true;
-    boolean rightWasPressed = false;
-    double grip1Position = grip1.getPosition();
-    double grip2Position = grip2.getPosition();
-
     public void init()          // initiates and maps motors/servos/sensors
     {
         motorRightFront = hardwareMap.dcMotor.get("mRF");               // Finds the motor and the library to use it
@@ -86,29 +79,11 @@ public class LifterBotZach extends OpMode {
         }
 
         if (gamepad1.left_bumper) {
-            if (!leftWasPressed) {
-                timer.reset();
-                leftWasPressed = true;
-                grip1Position = grip1.getPosition();
-                grip2Position = grip2.getPosition();
-            }
-            grip1.setPosition(grip1Position - 0.001 * timer.time());
-            grip2.setPosition(grip2Position + 0.001 * timer.time());
-
-        } else if(leftWasPressed){
-            leftWasPressed = false;
+            grip1.setPosition(0.75);
+            grip2.setPosition(0.25);
         } else if (gamepad1.right_bumper) {
-            if (!rightWasPressed) {
-                timer.reset();
-                rightWasPressed = true;
-                grip1Position = grip1.getPosition();
-                grip2Position = grip2.getPosition();
-            }
-            grip1.setPosition(grip1Position + 0.001 * timer.time());
-            grip2.setPosition(grip2Position - 0.001 * timer.time());
-
-        } else if(rightWasPressed){
-            rightWasPressed = false;
+            grip1.setPosition(1);
+            grip2.setPosition(0);
         }
 
         telemetry.addData("Joy1", "Drive:  " + String.format("%.2s", drive)); // feedback given to the driver phone from the robot phone
