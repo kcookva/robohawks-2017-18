@@ -22,12 +22,6 @@ public class LifterBotWillem extends OpMode {
     Servo grip1;
     Servo grip2;
 
-    ElapsedTime timer = new ElapsedTime();
-    boolean leftWasPressed = true;
-    boolean rightWasPressed = false;
-    double grip1Position = grip1.getPosition();
-    double grip2Position = grip2.getPosition();
-
     public void init()          // initiates and maps motors/servos/sensors
     {
         motorRightFront = hardwareMap.dcMotor.get("mRF");               // Finds the motor and the library to use it
