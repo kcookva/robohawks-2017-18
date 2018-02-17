@@ -85,29 +85,12 @@ public class LifterBotWillem extends OpMode {
         }
 
         if (gamepad1.left_bumper) {
-            if (!leftWasPressed) {
-                timer.reset();
-                leftWasPressed = true;
-                grip1Position = grip1.getPosition();
-                grip2Position = grip2.getPosition();
-            }
-            grip1.setPosition(grip1Position - 0.001 * timer.time());
-            grip2.setPosition(grip2Position + 0.001 * timer.time());
-
-        } else if(leftWasPressed){
-            leftWasPressed = false;
+            grip1.setPosition(grip1.getPosition() - 0.001);
+            grip2.setPosition(grip2.getPosition() + 0.001);
         } else if (gamepad1.right_bumper) {
-            if (!rightWasPressed) {
-                timer.reset();
-                rightWasPressed = true;
-                grip1Position = grip1.getPosition();
-                grip2Position = grip2.getPosition();
-            }
-            grip1.setPosition(grip1Position + 0.001 * timer.time());
-            grip2.setPosition(grip2Position - 0.001 * timer.time());
+            grip1.setPosition(grip1.getPosition() + 0.001);
+            grip2.setPosition(grip2.getPosition() - 0.001);
 
-        } else if(rightWasPressed){
-            rightWasPressed = false;
         }
 
         telemetry.addData("Joy1", "Drive:  " + String.format("%.2s", drive)); // feedback given to the driver phone from the robot phone
