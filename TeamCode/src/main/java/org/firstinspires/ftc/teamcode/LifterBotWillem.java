@@ -77,11 +77,11 @@ public class LifterBotWillem extends OpMode {
         }
 
         if (gamepad1.left_bumper) {
-            grip1.setPosition(grip1.getPosition() - 0.001);
-            grip2.setPosition(grip2.getPosition() + 0.001);
+            grip1.setPosition(grip1.getPosition() + 0.005);
+            grip2.setPosition(grip2.getPosition() - 0.005);
         } else if (gamepad1.right_bumper) {
-            grip1.setPosition(grip1.getPosition() + 0.001);
-            grip2.setPosition(grip2.getPosition() - 0.001);
+            grip1.setPosition(grip1.getPosition() - 0.005);
+            grip2.setPosition(grip2.getPosition() + 0.005);
 
         }
 
