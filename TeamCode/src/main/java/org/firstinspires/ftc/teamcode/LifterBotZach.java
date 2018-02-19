@@ -35,8 +35,8 @@ public class LifterBotZach extends OpMode {
         motorLeftFront.setDirection(DcMotor.Direction.REVERSE);      //think about logic of motors and how you need to reverse two of them
         motorLeftBack.setDirection(DcMotor.Direction.REVERSE);
 
-        grip1.setPosition(1);
-        grip2.setPosition(0);
+        grip1.setPosition(0.9);
+        grip2.setPosition(0.1);
     }
 
     int speed = 4;
