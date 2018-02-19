@@ -34,6 +34,9 @@ public class LifterBotZach extends OpMode {
 
         motorLeftFront.setDirection(DcMotor.Direction.REVERSE);      //think about logic of motors and how you need to reverse two of them
         motorLeftBack.setDirection(DcMotor.Direction.REVERSE);
+
+        grip1.setPosition(1);
+        grip2.setPosition(0);
     }
 
     int speed = 4;
@@ -82,6 +85,14 @@ public class LifterBotZach extends OpMode {
         } else if (gamepad1.right_trigger > 0.1) {
             grip1.setPosition(grip1.getPosition() + 0.005);
             grip2.setPosition(grip2.getPosition() - 0.005);
+        }
+        if(gamepad1.left_bumper) {
+            grip1.setPosition(0.25);
+            grip2.setPosition(0.75);
+        }
+        if(gamepad1.right_bumper) {
+            grip1.setPosition(0);
+            grip2.setPosition(1);
         }
 
         telemetry.addData("Joy1", "Drive:  " + String.format("%.2s", drive)); // feedback given to the driver phone from the robot phone
