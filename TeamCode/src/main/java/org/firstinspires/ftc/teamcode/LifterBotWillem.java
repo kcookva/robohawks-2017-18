@@ -57,14 +57,12 @@ public class LifterBotWillem extends OpMode {
         else if (gamepad1.dpad_down) speed = 2;
         else if (gamepad1.dpad_left) speed = 1;
 
-        if (Math.abs(gamepad1.right_stick_y) > .1 || Math.abs(gamepad1.right_stick_x) > .1 || Math.abs(gamepad1.left_stick_x) > .1)  // if joystick value is greater than .1, move.  Will not move if no value (joystick idle)
-        {
+        if (Math.abs(gamepad1.right_stick_y) > .1 || Math.abs(gamepad1.right_stick_x) > .1 || Math.abs(gamepad1.left_stick_x) > .1) { // if joystick value is greater than .1, move.  Will not move if no value (joystick idle)
             motorRightFront.setPower((drive - strafe - rotate) * balancer / 12 * speed);
-            motorRightBack.setPower((drive + strafe - rotate) * (1 / balancer) / 12 * speed);
+            motorRightBack.setPower((drive + strafe - rotate) / balancer / 12 * speed);
             motorLeftFront.setPower((drive + strafe + rotate) * balancer / 12 * speed);
-            motorLeftBack.setPower((drive - strafe + rotate) * (1 / balancer) / 12 * speed);
-        } else                            //will not move if joysticks are not moving
-        {
+            motorLeftBack.setPower((drive - strafe + rotate) / balancer / 12 * speed);
+        } else {                           //will not move if joysticks are not moving
             motorRightFront.setPower(0);
             motorRightBack.setPower(0);
             motorLeftFront.setPower(0);

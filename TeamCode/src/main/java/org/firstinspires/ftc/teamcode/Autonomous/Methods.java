@@ -12,7 +12,6 @@ public class Methods extends Setup {
 
     public int stage = 0;
     public long encoderSet = 0;
-    public boolean timerStart = true;
 
     public void resetEncoders() {
         encoderSet = motorRightBack.getCurrentPosition();
