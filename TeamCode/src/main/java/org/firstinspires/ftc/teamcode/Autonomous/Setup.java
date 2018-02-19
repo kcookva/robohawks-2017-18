@@ -30,8 +30,8 @@ public class Setup extends OpMode{
         grip1 = hardwareMap.servo.get("grip1");
         grip2 = hardwareMap.servo.get("grip2");
 
-        motorLeftFront.setDirection(DcMotor.Direction.REVERSE);      //think about logic of motors and how you need to reverse two of them
-        motorLeftBack.setDirection(DcMotor.Direction.REVERSE);
+        motorRightFront.setDirection(DcMotor.Direction.REVERSE);      //think about logic of motors and how you need to reverse two of them
+        motorRightBack.setDirection(DcMotor.Direction.REVERSE);
     }
 
     public void loop() {}
