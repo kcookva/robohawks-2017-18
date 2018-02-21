@@ -79,10 +79,10 @@ public class LifterBotZach extends OpMode {
             lift.setPower(0.2);
         }
 
-        if (gamepad1.left_trigger > 0.1 && grip1.getPosition() < 0.9) {
+        if (gamepad1.right_trigger > 0.1 && grip1.getPosition() > 0) {
             grip1.setPosition(grip1.getPosition() - 0.005);
             grip2.setPosition(grip2.getPosition() + 0.005);
-        } else if (gamepad1.right_trigger > 0.1 && grip1.getPosition() > 0) {
+        } else if (gamepad1.left_trigger > 0.1 && grip1.getPosition() < 0.9) {
             grip1.setPosition(grip1.getPosition() + 0.005);
             grip2.setPosition(grip2.getPosition() - 0.005);
         }
@@ -98,5 +98,7 @@ public class LifterBotZach extends OpMode {
         telemetry.addData("Joy1", "Drive:  " + String.format("%.2s", drive)); // feedback given to the driver phone from the robot phone
         telemetry.addData("Joy1", "Strafe:  " + String.format("%.2s", strafe));
         telemetry.addData("Joy1", "Rotate:  " + String.format("%.2s", rotate));
+        telemetry.addData("Grip1", "Position:  " + String.format("%.4s", grip1.getPosition())); // feedback given to the driver phone from the robot phone
+        telemetry.addData("Grip2", "Position:  " + String.format("%.4s", grip2.getPosition()));
     }
 }
