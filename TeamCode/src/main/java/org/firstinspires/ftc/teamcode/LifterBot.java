@@ -1,3 +1,4 @@
+//Importing libaries (using ftc library)
 package org.firstinspires.ftc.teamcode;
 
 import com.qualcomm.robotcore.eventloop.opmode.OpMode;
@@ -9,6 +10,7 @@ import com.qualcomm.robotcore.util.Range;
  * Created by Sam on 11/2/2017. Copied and pasted by Willem. Viewed by Milo.
  */
 
+//Using inheritance to extend other methods
 public class LifterBot extends OpMode{
 
     DcMotor motorRightA;                    // creates motors in code
