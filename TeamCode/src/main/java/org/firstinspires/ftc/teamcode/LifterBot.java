@@ -52,6 +52,7 @@ public class LifterBot extends OpMode{
 
         if (Math.abs(gamepad1.left_stick_y) > .1 || Math.abs(gamepad1.right_stick_y) > .1)  // if joystick value is greater than .1, move.  Will not move if no value (joystick idle)
         {
+            //Sets motor powers based on stick readings
             motorRightA.setPower((-leftY - leftX - rightX) / 4 * speed);
             motorRightB.setPower((-leftY + leftX + rightX) / 4 * speed);
             motorLeftA.setPower((leftY + leftX - rightX) / 4 * speed);
